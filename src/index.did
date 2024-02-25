@@ -1,0 +1,26 @@
+type EnergyHarvester = record {
+  id : text;
+  energyRecords : vec EnergyRecord;
+  name : text;
+  location : text;
+};
+type EnergyPayload = record {
+  energyRecords : vec EnergyRecord;
+  name : text;
+  location : text;
+};
+type EnergyRecord = record {
+  id : text;
+  source : text;
+  timestamp : nat64;
+  powerGenerated : float64;
+};
+type _AzleResult = variant { Ok : EnergyHarvester; Err : text };
+type _AzleResult_1 = variant { Ok : vec EnergyHarvester; Err : text };
+service : () -> {
+  addEnergyHarvester : (EnergyPayload) -> (_AzleResult);
+  getEnergyHarvester : (text) -> (_AzleResult);
+  getEnergyHarvesters : () -> (_AzleResult_1);
+  searchEnergyHarvesters : (text) -> (_AzleResult_1) query;
+  updateEnergyHarvester : (text, EnergyPayload) -> (_AzleResult);
+}
