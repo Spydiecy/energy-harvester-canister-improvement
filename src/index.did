@@ -16,11 +16,17 @@ type EnergyRecord = record {
   powerGenerated : float64;
 };
 type _AzleResult = variant { Ok : EnergyHarvester; Err : text };
-type _AzleResult_1 = variant { Ok : vec EnergyHarvester; Err : text };
+type _AzleResult_1 = variant { Ok : float64; Err : text };
+type _AzleResult_2 = variant { Ok : vec EnergyHarvester; Err : text };
+type _AzleResult_3 = variant { Ok : vec EnergyRecord; Err : text };
 service : () -> {
   addEnergyHarvester : (EnergyPayload) -> (_AzleResult);
+  deleteEnergyHarvester : (text) -> (_AzleResult);
+  getAveragePowerGenerated : () -> (_AzleResult_1);
   getEnergyHarvester : (text) -> (_AzleResult);
-  getEnergyHarvesters : () -> (_AzleResult_1);
-  searchEnergyHarvesters : (text) -> (_AzleResult_1) query;
+  getEnergyHarvesters : () -> (_AzleResult_2);
+  getEnergyRecords : (text) -> (_AzleResult_3);
+  getTotalPowerGenerated : () -> (_AzleResult_1);
+  searchEnergyHarvesters : (text) -> (_AzleResult_2) query;
   updateEnergyHarvester : (text, EnergyPayload) -> (_AzleResult);
 }
